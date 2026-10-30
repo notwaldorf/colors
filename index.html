@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Color Picker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>Color Picker</h1>
+    <p>Tap a color, see what goes with it.</p>
+  </header>
+
+  <div class="controls">
+    <label class="btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+      Take photo
+      <input id="cam" type="file" accept="image/*" capture="environment">
+    </label>
+    <label class="btn ghost">
+      Choose from library
+      <input id="lib" type="file" accept="image/*">
+    </label>
+  </div>
+
+  <div class="controls">
+    <span class="group"><span class="label">Sample</span>
+      <span class="seg" id="sizeSeg">
+        <button data-v="1">1 px</button>
+        <button data-v="5" class="on">5×5 avg</button>
+        <button data-v="11">11×11 avg</button>
+      </span>
+    </span>
+  </div>
+
+  <div class="layout">
+    <div>
+      <div class="stage" id="stage">
+        <div class="empty" id="empty">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 8"/></svg>
+          <div>Take or choose a photo to start.<br>You can also drop an image here.</div>
+        </div>
+        <canvas id="photo" class="hidden"></canvas>
+      </div>
+      <p class="hint" id="hint">Tap or drag on the photo to pick a color. A magnifier shows exactly where you are.</p>
+    </div>
+
+    <div class="side">
+      <div class="card">
+        <h2>Picked so far</h2>
+        <div class="history" id="history"><span class="muted">Tap the photo to start collecting colors.</span></div>
+      </div>
+
+      <div class="card" id="harmonies">
+        <h2>What goes with it</h2>
+        <div class="group" style="margin-bottom:10px"><span class="label">Wheel</span>
+          <span class="seg" id="wheelSeg">
+            <button data-v="ryb" class="on" title="Traditional red–yellow–blue painter's wheel">Painter's (RYB)</button>
+            <button data-v="rgb" title="Red–green–blue light wheel">Light (RGB)</button>
+          </span>
+        </div>
+        <p class="muted" style="margin:0">Tap any swatch to copy its hex code. Double-tap to make it the base color.</p>
+        <div id="sets"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<canvas id="loupe" width="132" height="132"></canvas>
+<div id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
